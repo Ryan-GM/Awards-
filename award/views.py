@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 import random
 from django.contrib.auth.models import User
 from rest_framework import viewsets
+from .models import Profile,Rating,Post
 
 # Create your views here.
 def index(request):
