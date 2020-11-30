@@ -4,6 +4,8 @@ import datetime as dt
 from django.db.models.fields.files import ImageField 
 from django.dispatch import receiver
 from django.db.models.signals import post_save 
+from pyuploadcare.dj.models import ImageField
+
 # Create your models here.
 
 class Profile(models.Model):
