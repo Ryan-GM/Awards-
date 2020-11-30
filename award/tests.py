@@ -63,4 +63,4 @@ class RatingTest(TestCase):
     def test_get_post_rating(self, id):
         self.rating.save()
         rating = Rating.get_ratings(post_id=id)
-        self.assertTrue(len(rating) == 1
+        self.assertTrue(len(rating) == 1)
