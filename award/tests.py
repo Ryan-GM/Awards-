@@ -4,7 +4,7 @@ from .models import *
 # Create your tests here.
 class PostTest(TestCase):
     def setUp(self):
-        self.user = Post.objects.create(id=1,title='test post', photo='https://ucarecdn.com/0ccf61ff-508e-46c6-b713-db51daa6626e', description='desc',
+        self.post = Post.objects.create(id=1,title='test post', photo='https://ucarecdn.com/0ccf61ff-508e-46c6-b713-db51daa6626e', description='desc',
                                         user=self.user, url='http://ur.coml')
         self.user = User.objects.create(id=1, username='ryan')
 
