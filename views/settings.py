@@ -39,7 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'award',
     'rest_framework',
+    'pyuploadcare.dj',
 ]
+
+UPLOADCARE = {
+    'pub_key': 'cartoon2563881scdc',
+    'secret': 'changer4521842fgde' ,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
