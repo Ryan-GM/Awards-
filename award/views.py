@@ -5,6 +5,9 @@ import random
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from .models import Profile,Rating,Post
+from django.contrib.auth import login,authenticate
+from .forms import UpdateUserForm,UpdateUserProfileForm,PostForm,RatingsForm,SignupForm
+from .serializer import ProfileSerializer,PostSerializer,UserSerializer
 
 # Create your views here.
 def index(request):
@@ -25,7 +28,7 @@ def index(request):
         print(random_post.photo)
     except Post.DoesNotExist:
         posts = None
-    return render(request, 'index.html', {'posts': posts, 'form': form, 'random_post': random_post})
+    return render(request, 'index.html', {'posts': posts, 'form': form, 'random_post': random})
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
