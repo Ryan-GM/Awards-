@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'award',
     'rest_framework',
     'pyuploadcare.dj',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 UPLOADCARE = {
     'pub_key': 'cartoon2563881scdc',
