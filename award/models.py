@@ -32,7 +32,7 @@ class Post(models.Model):
     title = models.CharField(max_length=155)
     url = models.URLField(max_length=255)
     description = models.TextField(max_length=255)
-    photo = ImageField(blank=True, verbose_name="", manual_crop='1280x720')
+    photo = ImageField(blank=True, manual_crop='1280x720')
     technologies = models.CharField(max_length=200, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     date = models.DateTimeField(auto_now_add=True, blank=True)

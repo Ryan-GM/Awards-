@@ -8,6 +8,7 @@ from .models import Profile,Rating,Post
 from django.contrib.auth import login,authenticate
 from .forms import UpdateUserForm,UpdateUserProfileForm,PostForm,RatingsForm,SignupForm
 from .serializer import ProfileSerializer,PostSerializer,UserSerializer
+from cloudinary.forms import cl_init_js_callbacks
 
 # Create your views here.
 def index(request):
