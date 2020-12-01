@@ -9,7 +9,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'url', 'description', 'technologies',)
+        fields = ('photo',)
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
