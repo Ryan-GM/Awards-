@@ -80,8 +80,8 @@ INSTALLED_APPS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 UPLOADCARE = {
-    'pub_key': 'cartoon2563881scdc',
-    'secret': 'changer4521842fgde' ,
+    'pub_key': '723875d3de03256560dc',
+    'secret': '7c4a28a198d36b87f91c' ,
 }
 
 MIDDLEWARE = [
@@ -100,7 +100,7 @@ ROOT_URLCONF = 'views.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
