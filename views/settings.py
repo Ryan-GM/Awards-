@@ -10,11 +10,43 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+from os import truncate
 from pathlib import Path
 import os
+import django_heroku
+import dj_database_url
+from decouple import config,Csv
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+ODE=config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
+# DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
+# development
+if config('MODE')=="dev":
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.postgresql_psycopg2',
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': config('DB_HOST'),
+           'PORT': '',
+       }
+       
+   }
+# production
+else:
+   DATABASES = {
+       'default': dj_database_url.config(
+           default=config('DATABASE_URL')
+       )
+   }
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,9 +56,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '5cre0n3vu3abl9t$coj(2j0zo$#2^(-0jaz+ykt%r24z=e4q^2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,6 +74,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'pyuploadcare.dj',
     'crispy_forms',
+    'cloudinary',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -136,9 +169,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static' ), ) 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
@@ -146,3 +177,18 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'index'
 
 LOGOUT_REDIRECT_URL = 'index'
+ 
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+
+# Cloudinary configurations
+cloudinary.config( 
+  cloud_name = "rayo", 
+  api_key = "932744348394112", 
+  api_secret = "NAu5gTJ9NhN_bAnpwwEPVg6XjXc" 
+)
+
+ #configuring django app for heroku
+django_heroku.settings(locals())
