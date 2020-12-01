@@ -28,7 +28,7 @@ def index(request):
         print(random_post.photo)
     except Post.DoesNotExist:
         posts = None
-    return render(request, 'index.html', {'posts': posts, 'form': form, 'random_post': random})
+    return render(request, 'reviews/index.html', {'posts': posts, 'form': form, 'random_post': random})
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -63,11 +63,11 @@ def profile(request, username):
 def user_profile(request, username):
     user_prof = get_object_or_404(User, username=username)
     if request.user == user_prof:
-        return redirect('profile', username=request.user.username)
+        return redirect('reviews/profile', username=request.user.username)
     params = {
         'user_prof': user_prof,
     }
-    return render(request, 'userprofile.html', params)
+    return render(request, 'reviews/userprofile.html', params)
 
 @login_required(login_url='login')
 def edit_profile(request, username):
@@ -78,7 +78,7 @@ def edit_profile(request, username):
         if user_form.is_valid() and prof_form.is_valid():
             user_form.save()
             prof_form.save()
-            return redirect('profile', user.username)
+            return redirect('reviws/profile', user.username)
     else:
         user_form = UpdateUserForm(instance=request.user)
         prof_form = UpdateUserProfileForm(instance=request.user.profile)
@@ -86,7 +86,7 @@ def edit_profile(request, username):
         'user_form': user_form,
         'prof_form': prof_form
     }
-    return render(request, 'edit.html', params)
+    return render(request, 'reviews/edit.html', params)
 
 @login_required(login_url='login')
 def project(request, post):
@@ -131,7 +131,7 @@ def project(request, post):
         'rating_status': rating_status
 
     }
-    return render(request, 'view.html', params)
+    return render(request, 'reviews/view.html', params)
 
 
 def search_project(request):
@@ -144,7 +144,7 @@ def search_project(request):
             'results': results,
             'message': message
         }
-        return render(request, 'results.html', params)
+        return render(request, 'reviews/results.html', params)
     else:
         message = "You haven't searched for any image category"
-    return render(request, 'results.html', {'message': message})
+    return render(request, 'reviews/results.html', {'message': message})
