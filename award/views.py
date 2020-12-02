@@ -24,12 +24,12 @@ def index(request):
     try:
         posts = Post.objects.all()
         posts = posts[::-1]
-        a_post = random.randint(0,10)
-        random_post = a_post
-        print(random_post)
+        a_post = random.randint(0, len(posts)-1)
+        random_post = posts[a_post]
+        print(random_post.photo)
     except Post.DoesNotExist:
         posts = None
-    return render(request, 'reviews/index.html', {'posts': posts, 'form': form, 'random_post': random})
+    return render(request, 'reviews/index.html', {'posts': posts, 'form': form, 'random_post': random_post})
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -132,7 +132,7 @@ def project(request, post):
         'rating_status': rating_status
 
     }
-    return render(request, 'reviews/view.html', params)
+    return render(request, 'reviews/views.html', params)
 
 
 def search_project(request):
